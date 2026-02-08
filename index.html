@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love 💖</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background: #ffe6f0;
+        overflow: hidden;
+        text-align: center;
+        color: #ff3366;
+        cursor: pointer;
+    }
+
+    h1 {
+        margin-top: 50px;
+        font-size: 3em;
+        animation: pulse 1.5s infinite;
+    }
+
+    p {
+        font-size: 1.5em;
+        margin: 20px;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    .heart {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #ff3366;
+        transform: rotate(-45deg);
+        animation: float 5s linear infinite;
+    }
+    .heart:before,
+    .heart:after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #ff3366;
+        border-radius: 50%;
+    }
+    .heart:before { top: -10px; left: 0; }
+    .heart:after { left: 10px; top: 0; }
+
+    @keyframes float {
+        0% { transform: translateY(100vh) scale(1); }
+        50% { transform: translateY(50vh) scale(1.2); }
+        100% { transform: translateY(-10vh) scale(1); }
+    }
+
+    .message {
+        position: absolute;
+        font-size: 1.2em;
+        color: #ff3399;
+        font-weight: bold;
+        user-select: none;
+        pointer-events: none;
+        animation: fadeOut 2s forwards;
+    }
+
+    @keyframes fadeOut {
+        0% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-50px); }
+    }
+</style>
+</head>
+<body>
+
+<h1>💖 For My Love 💖</h1>
+<p>Hey <strong>Princess 💕</strong>, click anywhere for surprises! ✨</p>
+
+<script>
+// Floating hearts
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => { heart.remove(); }, 6000);
+}
+setInterval(createHeart, 500);
+
+// Click for fun messages
+const messages = [
+    "You're my sunshine ☀️",
+    "I love you to the moon 🌙",
+    "You're my everything 💕",
+    "Forever together 💖",
+    "My heart beats for you ❤️",
+    "You make me smile 😘",
+    "You're magical ✨",
+    "Love you endlessly 💘"
+];
+
+document.body.addEventListener('click', (e) => {
+    const msg = document.createElement('div');
+    msg.className = 'message';
+    msg.innerText = messages[Math.floor(Math.random() * messages.length)];
+    msg.style.left = e.pageX + 'px';
+    msg.style.top = e.pageY + 'px';
+    document.body.appendChild(msg);
+    setTimeout(() => { msg.remove(); }, 2000);
+
+    // Fun confetti hearts
+    for(let i=0;i<5;i++){
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.style.left = (e.pageX + (Math.random()*40-20)) + 'px';
+        h.style.top = (e.pageY + (Math.random()*40-20)) + 'px';
+        h.style.width = h.style.height = (10 + Math.random()*15) + 'px';
+        document.body.appendChild(h);
+        setTimeout(() => { h.remove(); }, 3000);
+    }
+});
+</script>
+
+</body>
+</html>
